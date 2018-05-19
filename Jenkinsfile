@@ -1,12 +1,11 @@
 pipeline {
     agent any
     stages {
-        stage('init') {
+        stage('init-project') {
             steps {
                 bat 'npm install'
             }
-        stage('start'){
-                bat 'npm start'
+            steps {   bat 'npm start'
             }
         }
     }
