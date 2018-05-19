@@ -5,8 +5,16 @@ pipeline {
             steps {
                 bat 'npm install'
             }
-            steps {   bat 'npm start'
+        }
+        stage('test'){
+            steps {
+                bat 'npm test'
             }
         }
+       stage ('start'){
+            steps {
+                bat 'npm start'
+            }
+       }
     }
 }
