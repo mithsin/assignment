@@ -1,30 +1,24 @@
 pipeline {
     agent any
+    environment {
+        CI = 'true'
+    }
     stages {
-        stage('init-project') {
+        stage('Build') {
             steps {
-                bat 'npm run build'
+                sh 'npm install'
             }
         }
-        stage('test'){
+        stage('Test') {
             steps {
-                bat 'npm test'
+                sh './jfile/test.sh'
             }
         }
-        stage('start'){
+        stage('Deliver') {
             steps {
-                bat 'npm start'
-            }
-        }
-        stage('deploy'){
-            steps {
-              bat 'npm start'
-            }
-            steps {
-              bat 'sleep 1'
-            }
-            steps {
-              echo '$! > .pidfile'
+                sh './jfile/deliver.sh'
+                input message: 'Finished using the web site? (Click "Proceed" to continue)'
+                sh './jfile/kill.sh'
             }
         }
     }
