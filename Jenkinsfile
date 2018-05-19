@@ -1,27 +1,27 @@
 pipeline {
     agent any
     stages {
-
-        stage('test'){
+        stage('init-project') {
             steps {
-              bat 'set -x
-              # npm install --save-dev cross-env
-              set +x'
+                bat 'npm run build'
             }
         }
-       stage ('start'){
+        stage('test'){
             steps {
-              bat 'set -x
-              npm run build
-              set +x'
+                bat 'npm test'
             }
-       }
-       stage ('deploy'){
+        }
+        stage('start'){
             steps {
-                bat 'npm start &
+                bat 'npm start'
+            }
+        }
+        stage('deploy'){
+            steps {
+              bat 'npm start &
               sleep 1
               echo $! > .pidfile'
             }
-       }
+        }
     }
 }
