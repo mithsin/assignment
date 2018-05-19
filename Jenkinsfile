@@ -1,20 +1,14 @@
 pipeline {
-    agent any
-    environment {
-        CI = 'true'
+    agent {
+        docker {
+            image 'node:6-alpine'
+            args '-p 3000:3000'
+        }
     }
     stages {
-
-        stage('Test') {
+        stage('Build') {
             steps {
-              bat './jfile/test.bat'
-            }
-        }
-        stage('Deliver') {
-            steps {
-              bat './jfile/deliver.bat'
-                input message: 'Finished using the web site? (Click "Proceed" to continue)'
-              bat './jfile/kill.bat'
+                sh 'npm install'
             }
         }
     }
