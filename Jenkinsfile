@@ -4,12 +4,23 @@ pipeline {
 
         stage('test'){
             steps {
-                bat 'npm test'
+              bat 'set -x
+              # npm install --save-dev cross-env
+              set +x'
             }
         }
        stage ('start'){
             steps {
-                bat 'npm start'
+              bat 'set -x
+              npm run build
+              set +x'
+            }
+       }
+       stage ('deploy'){
+            steps {
+                bat 'npm start &
+              sleep 1
+              echo $! > .pidfile'
             }
        }
     }
