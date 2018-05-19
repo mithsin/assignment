@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                bat 'npm test'
+                echo 'npm test'
             }
         }
     }
