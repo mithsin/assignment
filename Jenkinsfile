@@ -18,9 +18,13 @@ pipeline {
         }
         stage('deploy'){
             steps {
-              bat 'npm start &
-              sleep 1
-              echo $! > .pidfile'
+              bat 'npm start'
+            }
+            steps {
+              bat 'sleep 1'
+            }
+            steps {
+              echo '$! > .pidfile'
             }
         }
     }
