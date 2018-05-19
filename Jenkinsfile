@@ -6,19 +6,19 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'npm install'
+              bat 'npm install'
             }
         }
         stage('Test') {
             steps {
-                sh './jfile/test.sh'
+              bat './jfile/test.sh'
             }
         }
         stage('Deliver') {
             steps {
-                sh './jfile/deliver.sh'
+              bat './jfile/deliver.sh'
                 input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                sh './jfile/kill.sh'
+              bat './jfile/kill.sh'
             }
         }
     }
